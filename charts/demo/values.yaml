@@ -36,7 +36,7 @@ serviceAccount:
 # This is for setting Kubernetes Annotations to a Pod.
 # For more information checkout: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/ 
 podAnnotations: 
-  deploymentTime: "2006-01-02T15:04:05"
+  deploymentTimestamp: "2006-01-02T15:04:05"
 # This is for setting Kubernetes Labels to a Pod.
 # For more information checkout: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
 podLabels: {}
