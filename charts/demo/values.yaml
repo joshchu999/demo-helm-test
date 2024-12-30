@@ -33,6 +33,17 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: ""
 
+vault:
+  create: false
+  auth:
+    mount: kubernetes
+    role: role
+  secrets:
+    type: kv-v2
+    mount: kv-v2
+    path: ""
+    refreshAfter: 1m
+
 # This is for setting Kubernetes Annotations to a Pod.
 # For more information checkout: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/ 
 podAnnotations: 
