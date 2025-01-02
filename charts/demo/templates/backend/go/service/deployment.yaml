@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ list (include "demo.backend.go.service1.name" .) "deployment" | join "-" }}
+  labels:
+    {{- include "demo.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.backend.go.service1.replicas }}
+  selector:
+    matchLabels:
+      {{- include "demo.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.backend.go.service1.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "demo.labels" . | nindent 8 }}
+        {{- with .Values.backend.go.service1.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.backend.go.service1.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ list (include "demo.backend.go.service1.name" .) "service-account" | join "-" }}
+      securityContext:
+        {{- toYaml .Values.backend.go.service1.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.backend.go.service1.securityContext | nindent 12 }}
+          image: "{{ .Values.backend.go.service1.image.repository }}:{{ .Values.backend.go.service1.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.backend.go.service1.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.backend.go.service1.port }}
+              protocol: TCP
+          livenessProbe:
+            {{- toYaml .Values.backend.go.service1.livenessProbe | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.backend.go.service1.readinessProbe | nindent 12 }}
+          resources:
+            {{- toYaml .Values.backend.go.service1.resources | nindent 12 }}
+          {{- with .Values.backend.go.service1.volumeMounts }}
+          volumeMounts:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      {{- with .Values.backend.go.service1.volumes }}
+      volumes:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.backend.go.service1.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.backend.go.service1.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.backend.go.service1.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

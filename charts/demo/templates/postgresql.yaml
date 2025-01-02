@@ -1,13 +1,13 @@
 apiVersion: "acid.zalan.do/v1"
 kind: postgresql
 metadata:
-  name: {{ .Values.database.name }}-postgresql
+  name: postgresql
   labels:
     {{- include "demo.labels" . | nindent 4 }}
 spec:
   teamId: {{ .Values.database.team }}
   postgresql:
-    version: {{ quote .Values.database.version }}
+    version: {{ .Values.database.version | quote }}
   numberOfInstances: {{ .Values.database.instances }}
   {{- with .Values.database.storage }}
   volume:

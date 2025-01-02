@@ -1,0 +1,25 @@
+{{- if .Values.backend.go.service1.httpRoute.enabled -}}
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: {{ list (include "demo.backend.go.service1.name" .) "http-route" | join "-" }}
+  labels:
+    {{- include "demo.labels" . | nindent 4 }}
+  {{- with .Values.backend.go.service1.httpRoute.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  {{- with .Values.backend.go.service1.httpRoute.parentRefs }}
+  parentRefs:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  {{- with .Values.backend.go.service1.httpRoute.hostnames }}
+  hostnames:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  rules:
+    - backendRefs:
+      - name: {{ list (include "demo.backend.go.service1.name" .) "service" | join "-" }}
+        port: {{ $.Values.backend.go.service1.service.port }}
+{{- end }}
