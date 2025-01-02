@@ -2,6 +2,19 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+database:
+  team: "team"
+  version: "16"
+  instances: 1
+  storage: ""
+  users:
+    admin:
+      - superuser
+      - createdb
+    backend-go-service1: []
+  databases:
+    backend-go-service1: backend-go-service1
+
 # This will set the replicaset count more information can be found here: https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/
 replicaCount: 1
 
