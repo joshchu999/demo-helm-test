@@ -3,6 +3,7 @@
 # Declare variables to be passed into your templates.
 
 database:
+  name: "demo"
   team: "team"
   version: "16"
   instances: 1

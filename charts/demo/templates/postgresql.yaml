@@ -1,7 +1,7 @@
 apiVersion: "acid.zalan.do/v1"
 kind: postgresql
 metadata:
-  name: {{ include "demo.fullname" . }}
+  name: {{ .Values.database.name }}
   labels:
     {{- include "demo.labels" . | nindent 4 }}
 spec:
