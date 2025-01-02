@@ -8,9 +8,6 @@ database:
   instances: 1
   storage: ""
   users:
-    admin:
-      - superuser
-      - createdb
     backend-go-service1: []
   databases:
     backend-go-service1: backend-go-service1
