@@ -103,7 +103,7 @@ backend:
       volumes:
         - name: config
           configMap:
-            name: demo
+            name: backend-go-service1-config-map
 
       # Additional volumeMounts on the output Deployment definition.
       volumeMounts:
@@ -122,4 +122,4 @@ backend:
           mount: kubernetes
         secrets:
           mount: kv-v2
-          refreshAfter: 1m
+          refreshAfter: 1h
