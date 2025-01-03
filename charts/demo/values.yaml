@@ -2,7 +2,7 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-database:
+postgresql:
   team: "team"
   version: "16"
   instances: 1
@@ -104,11 +104,16 @@ backend:
         - name: config
           configMap:
             name: backend-go-service1-config-map
+        - name: postgresql
+          secret:
+            secretName: backend-go-service1-vault-static-secret
 
       # Additional volumeMounts on the output Deployment definition.
       volumeMounts:
         - name: config
-          mountPath: "/etc/demo"
+          mountPath: "/etc/demo/config"
+        - name: postgresql
+          mountPath: "/etc/demo/postgresql"
 
       nodeSelector: {}
 
