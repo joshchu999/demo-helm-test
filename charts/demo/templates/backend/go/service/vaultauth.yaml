@@ -9,7 +9,7 @@ spec:
   method: kubernetes
   mount: {{ .Values.backend.go.service1.vault.auth.mount }}
   kubernetes:
-    role: {{ include "demo.backend.go.service1.name" . }}
+    role: {{ list .Release.Name (include "demo.backend.go.service1.name" .) "role" | join "-" }}
     serviceAccount: {{ list (include "demo.backend.go.service1.name" .) "service-account" | join "-" }}
     audiences:
       - vault
