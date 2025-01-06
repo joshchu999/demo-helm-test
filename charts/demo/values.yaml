@@ -3,14 +3,14 @@
 # Declare variables to be passed into your templates.
 
 postgresql:
-  team: "team"
-  version: "16"
+  version: "16.6"
   instances: 1
-  storage: ""
-  users:
-    backend-go-service1: []
-  databases:
-    backend-go-service1: backend-go-service1
+  bootstrap:
+    initdb:
+      database: backend-go-service1
+      owner: backend-go-service1
+  storage: 
+    size: 1Gi
 
 backend:
 

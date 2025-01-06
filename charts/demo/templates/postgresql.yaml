@@ -1,24 +1,18 @@
-apiVersion: "acid.zalan.do/v1"
-kind: postgresql
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
 metadata:
   name: postgresql
   labels:
     {{- include "demo.labels" . | nindent 4 }}
 spec:
-  teamId: {{ .Values.postgresql.team }}
-  postgresql:
-    version: {{ .Values.postgresql.version | quote }}
-  numberOfInstances: {{ .Values.postgresql.instances }}
-  {{- with .Values.postgresql.storage }}
-  volume:
-    size: {{ . }}
+  imageName: "ghcr.io/cloudnative-pg/postgresql:{{ .Values.postgresql.version }}"
+
+  instances: {{ .Values.postgresql.instances }}
+  
+  {{- with .Values.postgresql.bootstrap }}
+  bootstrap:
+    {{- toYaml . | nindent 4 }}
   {{- end }}
 
-  {{- with .Values.postgresql.users }}
-  users:
-    {{- toYaml . | nindent 4 }}
-  {{- end }}
-  {{- with .Values.postgresql.databases }}
-  databases:
-    {{- toYaml . | nindent 4 }}
-  {{- end }}
+  storage:
+    size: {{ .Values.postgresql.storage.size }}
