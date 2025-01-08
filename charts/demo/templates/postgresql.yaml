@@ -34,8 +34,8 @@ spec:
   bootstrap:
     initdb:
       postInitSQL:
-        - CREATE USER backend-go-service1 WITH PASSWORD '{{- $postgresqlBackendGoService1Password }}'
-        - CREATE DATABASE backend-go-service1 OWNER backend-go-service1
+        - CREATE USER backend_go_service1 WITH PASSWORD '{{- $postgresqlBackendGoService1Password }}'
+        - CREATE DATABASE backend_go_service1 OWNER backend_go_service1
 
   storage:
     size: {{ .Values.postgresql.storage.size }}
