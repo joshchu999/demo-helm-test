@@ -5,10 +5,6 @@
 postgresql:
   version: "16.6"
   instances: 1
-  bootstrap:
-    initdb:
-      database: backend-go-service1
-      owner: backend-go-service1
   storage: 
     size: 1Gi
 

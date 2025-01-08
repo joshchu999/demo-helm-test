@@ -22,5 +22,5 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 Create the default name of backend go service1
 */}}
 {{- define "demo.backend.go.service1.name" -}}
-{{- "backend-go-service1" }}
+{{- "backend-go-service1" -}}
 {{- end }}

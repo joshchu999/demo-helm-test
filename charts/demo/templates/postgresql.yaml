@@ -1,3 +1,22 @@
+{{- $postgresqlBackendGoService1Password := randAlphaNum 24 }}
+{{- $postgresqlBackendGoService1Secret := (lookup "v1" "Secret" .Release.Namespace (list "postgresql" (include "demo.backend.go.service1.name" .) "secret" | join "-")) }}
+{{- if $postgresqlBackendGoService1Secret }}
+{{- $postgresqlBackendGoService1Password = index $postgresqlBackendGoService1Secret.stringData "password" }}
+{{- end }}
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: {{ list "postgresql" (include "demo.backend.go.service1.name" .) "secret" | join "-" }}
+  labels:
+    {{- include "demo.labels" . | nindent 4 }}
+  annotations:
+    helm.sh/resource-policy: keep
+type: kubernetes.io/basic-auth
+stringData:
+  username: {{ "backend-go-service1" }}
+  password: {{ $postgresqlBackendGoService1Password }}
+---
 apiVersion: postgresql.cnpg.io/v1
 kind: Cluster
 metadata:
@@ -9,10 +28,14 @@ spec:
 
   instances: {{ .Values.postgresql.instances }}
   
-  {{- with .Values.postgresql.bootstrap }}
+  superuserSecret:
+    name: postgresql-postgres-secret
+    
   bootstrap:
-    {{- toYaml . | nindent 4 }}
-  {{- end }}
+    initdb:
+      postInitSQL:
+        - CREATE USER backend-go-service1 WITH PASSWORD '{{- $postgresqlBackendGoService1Password }}'
+        - CREATE DATABASE backend-go-service1 OWNER backend-go-service1
 
   storage:
     size: {{ .Values.postgresql.storage.size }}
