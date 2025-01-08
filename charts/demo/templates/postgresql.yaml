@@ -14,7 +14,7 @@ metadata:
     helm.sh/resource-policy: keep
 type: kubernetes.io/basic-auth
 stringData:
-  username: {{ "backend-go-service1" }}
+  username: backend_go_service1
   password: {{ $postgresqlBackendGoService1Password }}
 ---
 apiVersion: postgresql.cnpg.io/v1
