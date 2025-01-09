@@ -39,7 +39,7 @@ backend:
         annotations: {}
 
       podAnnotations:
-        updatedTimestamp: 1735689600
+        updatedTimestamp: "1735689600"
 
       podLabels: {}
 
