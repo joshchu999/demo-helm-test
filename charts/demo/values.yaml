@@ -99,7 +99,7 @@ backend:
             name: backend-go-service1-config-map
         - name: postgresql
           secret:
-            secretName: backend-go-service1-vault-static-secret
+            secretName: postgresql-backend-go-service1-secret
 
       # Additional volumeMounts on the output Deployment definition.
       volumeMounts:
@@ -113,11 +113,3 @@ backend:
       tolerations: []
 
       affinity: {}
-
-      vault:
-        create: true
-        auth:
-          mount: kubernetes
-        secrets:
-          mount: kv-v2
-          refreshAfter: 1h
