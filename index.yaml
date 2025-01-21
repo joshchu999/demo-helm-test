@@ -2,6 +2,16 @@ apiVersion: v1
 entries:
   demo:
   - apiVersion: v2
+    appVersion: 0.10.0
+    created: "2025-01-21T09:37:16.648760089Z"
+    description: A Helm chart for Kubernetes
+    digest: 535e48de2f702c10231ecda3034df1fa4c0d95f04b0e1ed5930a91d5503ff1fd
+    name: demo
+    type: application
+    urls:
+    - https://github.com/joshchu999/demo-helm-test/releases/download/demo-0.10.0/demo-0.10.0.tgz
+    version: 0.10.0
+  - apiVersion: v2
     appVersion: 0.9.1
     created: "2025-01-21T09:06:25.50172204Z"
     description: A Helm chart for Kubernetes
@@ -261,4 +271,4 @@ entries:
     urls:
     - https://github.com/joshchu999/demo-helm-test/releases/download/demo-0.1.0/demo-0.1.0.tgz
     version: 0.1.0
-generated: "2025-01-21T09:06:25.501973132Z"
+generated: "2025-01-21T09:37:16.648926654Z"
