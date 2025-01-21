@@ -28,6 +28,7 @@ spec:
 
   instances: {{ .Values.postgresql.instances }}
   
+  enableSuperuserAccess: true
   superuserSecret:
     name: postgresql-postgres-secret
     
