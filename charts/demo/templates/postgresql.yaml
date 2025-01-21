@@ -1,7 +1,7 @@
 {{- $postgresqlBackendGoService1Password := randAlphaNum 24 }}
 {{- $postgresqlBackendGoService1Secret := (lookup "v1" "Secret" .Release.Namespace (list "postgresql" (include "demo.backend.go.service1.name" .) "secret" | join "-")) }}
 {{- if $postgresqlBackendGoService1Secret }}
-{{- $postgresqlBackendGoService1Password = index $postgresqlBackendGoService1Secret.stringData "password" }}
+{{- $postgresqlBackendGoService1Password = (index $postgresqlBackendGoService1Secret.data "password" | b64dec) }}
 {{- end }}
 
 apiVersion: v1
