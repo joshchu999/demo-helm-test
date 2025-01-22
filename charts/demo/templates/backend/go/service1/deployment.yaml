@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ list (include "demo.backend.go.service1.name" .) "deployment" | join "-" }}
+  name: backend-go-service1-deployment
   labels:
     {{- include "demo.labels" . | nindent 4 }}
 spec:
@@ -25,7 +25,7 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ list (include "demo.backend.go.service1.name" .) "service-account" | join "-" }}
+      serviceAccountName: "backend-go-service1-service-account"
       securityContext:
         {{- toYaml .Values.backend.go.service1.podSecurityContext | nindent 8 }}
       containers:

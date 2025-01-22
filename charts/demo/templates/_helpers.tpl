@@ -17,10 +17,3 @@ Selector labels
 app.kubernetes.io/name: {{ .Chart.Name }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
-
-{{/*
-Create the default name of backend go service1
-*/}}
-{{- define "demo.backend.go.service1.name" -}}
-{{- "backend-go-service1" -}}
-{{- end }}

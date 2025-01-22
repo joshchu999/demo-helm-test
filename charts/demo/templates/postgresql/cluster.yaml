@@ -16,7 +16,8 @@ spec:
   bootstrap:
     initdb:
       postInitSQL:
-        - CREATE DATABASE backend_go_service1
+        - CREATE USER {{ .Values.postgresql.users.backendGoService1.username }} WITH PASSWORD '{{ .Values.postgresql.users.backendGoService1.password }}'
+        - CREATE DATABASE backend_go_service1 OWNER {{ .Values.postgresql.users.backendGoService1.username }}
 
   storage:
     size: {{ .Values.postgresql.storage.size }}

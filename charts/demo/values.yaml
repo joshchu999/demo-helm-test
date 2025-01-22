@@ -7,11 +7,13 @@ postgresql:
   instances: 1
   storage: 
     size: 1Gi
+  users:
+    backendGoService1: 
+      username: backend_go_service1
+      password: backend_go_service1_12345
 
 backend:
-
   go:
-
     service1:
       # This will set the replicaset count more information can be found here: https://kubernetes.io/docs/concepts/workloads/controllers/replicaset/
       replicas: 1
@@ -90,7 +92,7 @@ backend:
             name: backend-go-service1-config-map
         - name: postgresql
           secret:
-            secretName: postgresql-superuser
+            secretName: postgresql-backend-go-service1-secret
 
       # Additional volumeMounts on the output Deployment definition.
       volumeMounts:
