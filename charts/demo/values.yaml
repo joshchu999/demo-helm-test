@@ -90,7 +90,7 @@ backend:
             name: backend-go-service1-config-map
         - name: postgresql
           secret:
-            secretName: postgresql-backend-go-service1-secret
+            secretName: postgresql-app
 
       # Additional volumeMounts on the output Deployment definition.
       volumeMounts:
